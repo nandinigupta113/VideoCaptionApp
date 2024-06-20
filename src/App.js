@@ -1,25 +1,28 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import VideoPlayer from './VideoPlayer/VideoPlayer';
+import CaptionForm from './CaptionForm/CaptionForm';
 import './App.css';
+const App = () => {
+  const [videoUrl, setVideoUrl] = useState('');
+  const [captions, setCaptions] = useState([]);
+  const handleFormSubmit = (url, captions) => {
+    setVideoUrl(url);
+    setCaptions(captions);
+  };
 
-function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1 className='heading'>Video Caption App</h1>
+      <div className='contentbox'>
+      <CaptionForm onSubmit={handleFormSubmit} />
+      <div className='videobox'>
+      {videoUrl && <VideoPlayer videoUrl={videoUrl} captions={captions} />}
+      </div>
+      </div>
     </div>
   );
-}
+};
+
+
 
 export default App;
